@@ -20,6 +20,12 @@ rightFist.src = "imgs/rightFist.png";
 leftFist.src = "imgs/leftFist.png";
 
 function leapMotion() {
+
+  var controller = new Leap.Controller();
+  controller.connect();
+  controller.on('deviceConnected', onDeviceConnected);
+  controller.on('deviceDisconnected', onDeviceDisconnect);
+
   console.log("hello");
   var frameArr = new Array();
   var graspCheckLength = 20;
@@ -210,6 +216,17 @@ function leapMotion() {
 }
 
 
+function onDeviceConnected()
+{
+    zf.start=1;
+    zf.hideWarning();
+}
+
+function onDeviceDisconnect()
+{
+    zf.start=0;
+    zf.showWarning();
+}
 
 
 function getPosition(f) {
