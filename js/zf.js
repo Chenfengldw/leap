@@ -7,6 +7,7 @@ var zf = {
   k: document.getElementsByClassName('k')[0],
   o: document.getElementsByClassName('o')[0],
   modal: document.getElementById('modal'),
+  warning: document.getElementById('warning'),
   listModal: document.getElementById('list'),
   timerCanvas: document.getElementById('timerCanvas'),
   timerNumber: document.getElementById('timerNumber'),
@@ -16,6 +17,7 @@ var zf = {
   score: 0,
   nowTime: 15,
   start: 0,
+  user: '',
 
   countTimes: 0,
   rotateValue: 0,
@@ -27,6 +29,10 @@ var zf = {
     this.isKo = false
     this.score = 0
     this.nowTime = 15
+    this.start = 0
+    this.countTimes = 0
+    this.rotateValue = 0
+    this.context = null
     localStorage.setItem('score', 0)
     return this
   },
@@ -90,6 +96,17 @@ var zf = {
     return this
   },
 
+  showWarning: function () {
+    this.warning.style.display = 'block'
+    return this
+  },
+
+  hideWarning: function () {
+    this.warning.style.display = 'none'
+    return this
+  },
+
+
   showList: function () {
     this.listModal.style.display = 'block'
     return this
@@ -140,6 +157,7 @@ var zf = {
         if (process == 0) {
           this.timerCanvasFunc(0);
           this.start = 0;
+          setTimeout(this.showModal().bind(), 2000)
         } else {
           this.timerCanvasFunc(process);
           process--;

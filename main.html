@@ -105,15 +105,15 @@
   zfJquery(function() {
     document.getElementById('again').addEventListener('click', function() {
       zf.init()
+      zf.hideModal()
     })
 
     document.getElementById('save').addEventListener('click', function() {
       window.location.href = 'login.html'
-      console.log(zf.score)
       localStorage.setItem('score', zf.score)
     })
 
-    // zf.showModal()
+    zf.showModal()
   })
   </script>
 </body>

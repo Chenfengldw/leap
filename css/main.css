@@ -73,9 +73,10 @@ header img {
 }
 
 .modal button {
-  padding: 16px 40px;
+  padding: 16px 30px;
   margin: 10px;
   font-size: 18px;
+  outline: none;
   color: #fff;
   border: 0;
   border-radius: 10px;

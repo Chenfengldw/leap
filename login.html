@@ -39,8 +39,8 @@
       var password = zfJquery('#password')[0].value
       if (checkUsername(username) && checkPassword(password)) {
         zfJquery.ajax({
-          url: './test.json',
-          type: 'GET',
+          url: 'http://www.violachen.cn/KOPM/userLogin',
+          type: 'POST',
           data: {
             username: username,
             password: md5(password),

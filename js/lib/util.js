@@ -55,7 +55,7 @@
   }
 
   //判断重复密码是否相等
-  function checkPassword(password, repassword) {
+  function checkRepassword(password, repassword) {
     if (password === repassword) {
       return true
     } else {
