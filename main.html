@@ -61,6 +61,11 @@
           <button>分享至QQ空间</button>
         </div>
       </div>
+      <div class="mask-modal" id="warning">
+        <div class="warning-modal">
+          <h3>您还未连接leap motion 设备，请连接设备！</h3>
+        </div>
+      </div>
     </div>
     <!-- 模态窗 -->
   </div>
@@ -113,7 +118,7 @@
       localStorage.setItem('score', zf.score)
     })
 
-    zf.showModal()
+    zf.showWarning()
   })
   </script>
 </body>

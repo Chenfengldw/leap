@@ -304,3 +304,24 @@ img {
   left: 84px;
   top: 39px;
 }
+
+.mask-modal {
+  display: none;
+}
+
+.warning-modal {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate3d(-50%, -50%, 0);
+  transform: translate3d(-50%, -50%, 0);
+  background: RGBA(166, 166, 166, 1.00);
+  border-radius: 20px;
+}
+
+.warning-modal h3 {
+  padding: 10px 20px;
+  color: #fff;
+  text-align: center;
+  font-size: 26px;
+}
