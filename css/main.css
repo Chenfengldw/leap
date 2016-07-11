@@ -325,3 +325,31 @@ img {
   text-align: center;
   font-size: 26px;
 }
+
+#list ul {
+  clear: both;
+  overflow: auto;
+}
+
+#list ul li {
+  overflow: hidden;
+  padding-right: 40px;
+  color: #FFF;
+  font-size: 18px;
+  padding-top: 8px;
+}
+
+.listname {
+  float: left;
+  clear: both;
+  display: inline-block;
+}
+
+.listscore {
+  float: right;
+  display: inline-block;
+}
+
+#list .listme {
+  color: #3672d4;
+}

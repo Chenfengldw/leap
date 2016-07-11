@@ -52,13 +52,20 @@
       <div class="modal" id="list">
         <h3>最强榜单</h3>
         <ul>
-          <li>分享至QQ空间</li>
-          <li>分享至QQ空间</li>
-          <li>分享至QQ空间</li>
+          <li><span class="listname">NO.111我随便起个名字来测试</span><span class="listscore">10</span></li>
+          <li class="listme"><span class="listname">我随便起个名字来测试</span><span class="listscore">10</span></li>
+          <li><span class="listname">我随便起个名字来测试</span><span class="listscore">10</span></li>
+          <li><span class="listname">我随便起个名字来测试</span><span class="listscore">10</span></li>
+          <li><span class="listname">我随便起个名字来测试</span><span class="listscore">10</span></li>
+          <li><span class="listname">我随便起个名字来测试</span><span class="listscore">10</span></li>
+          <li><span class="listname">我随便起个名字来测试</span><span class="listscore">10</span></li>
+          <li><span class="listname">我随便起个名字来测试</span><span class="listscore">10</span></li>
+          <li><span class="listname">我随便起个名字来测试</span><span class="listscore">10</span></li>
+          <li><span class="listname">我随便起个名字来测试</span><span class="listscore">10</span></li>
         </ul>
         <div class="btns">
-          <button>再来一次</button>
-          <button>分享至QQ空间</button>
+          <button id="again1">再来一次</button>
+          <button id="share1">分享至QQ空间</button>
         </div>
       </div>
       <div class="mask-modal" id="warning">
@@ -98,6 +105,9 @@
     document.getElementById('share').addEventListener('click', function() {
       window.location.href = url;
     })
+    document.getElementById('share1').addEventListener('click', function() {
+      window.location.href = url;
+    })
   })();
   </script>
   <!-- <script src="js/timer.js"></script> -->
@@ -118,7 +128,12 @@
       localStorage.setItem('score', zf.score)
     })
 
-    zf.showWarning()
+    document.getElementById('again1').addEventListener('click', function() {
+      zf.init()
+      zf.hideList()
+    })
+
+    zf.showList()
   })
   </script>
 </body>
