@@ -7,22 +7,13 @@
   <title>打倒产品经理</title>
   <link rel="stylesheet" href="css/normalize-zh.css">
   <link rel="stylesheet" type="text/css" href="./css/main.css">
-  <link href="css/vis.css" rel="stylesheet" />
-  <link href="css/starBg.css" rel="stylesheet" />
-  <style type="text/css">
-  #backgroundNetwork {
-    position: absolute;
-    z-index: -1;
-  }
-  </style>
 </head>
 
 <body>
-  <div id="backgroundNetwork"></div>
   <div class="container">
     <header>
       <span id="user"></span>
-      <a href="http://www.violachen.cn/KOPM/cookieLogout" title=""><img src="imgs/logout.jpg" alt="退出"></a>
+      <a href="javascript:;" title="" id="logout"><img src="imgs/logout.jpg" alt="退出"></a>
     </header>
     <!-- 击打页面效果 -->
     <div class="hit">
@@ -92,20 +83,112 @@
       /*分享来源 如：腾讯网(可选)*/
       pics: '',
       /*分享图片的路径(可选)*/
-      style: '201',
-      width: 113,
-      height: 39
+      style: '203',
+      width: 98,
+      height: 22
     };
     var s = [];
     for (var i in p) {
       s.push(i + '=' + encodeURIComponent(p[i] || ''));
     }
-    var url = "http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?', s.join('&'), '"
-      // document.write(['<a version="1.0"  href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?', s.join('&'), '" target="_blank">分享</a>'].join(''));
+    document.write(['<a version="1.0" class="qzOpenerDiv" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?', s.join('&'), '" target="_blank">分享</a>'].join(''));
+  })();
+  </script>
+  <script src="http://qzonestyle.gtimg.cn/qzone/app/qzlike/qzopensl.js#jsdate=20111201" charset="utf-8"></script>
+  <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="./js/html2canvas.js"></script>
+  <script type="text/javascript">
+  (function() {
+
+    function share() {
+      var p = {
+        url: location.href,
+        showcount: '1',
+        /*是否显示分享总数,显示：'1'，不显示：'0' */
+        desc: '',
+        /*默认分享理由(可选)*/
+        summary: '',
+        /*分享摘要(可选)*/
+        title: '',
+        /*分享标题(可选)*/
+        site: '',
+        /*分享来源 如：腾讯网(可选)*/
+        pics: '',
+        /*分享图片的路径(可选)*/
+        style: '201',
+        width: 200,
+        height: 100
+      };
+      var s = [];
+      for (var i in p) {
+        s.push(i + '=' + encodeURIComponent(p[i] || ''));
+      }
+      var url = "http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?', s.join('&'), '"
+    }
+
+    // document.write(['<a version="1.0"  href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?', s.join('&'), '" target="_blank">分享</a>'].join(''));
     document.getElementById('share').addEventListener('click', function() {
+
+      // html2canvas(document.body).then(function(canvas) {
+      //   document.body.appendChild(canvas);
+      //   var allcanvas = document.getElementsByTagName("canvas");
+      //   var imageDate = document.getElementsByTagName("canvas")[allcanvas.length-1].toDataURL();
+      //   var lastcanvas = allcanvas[allcanvas.length - 1];
+      //   console.log(imageDate)
+      //   $(lastcanvas).remove();
+      // });
+      var p = {
+        url: location.href,
+        showcount: '1',
+        /*是否显示分享总数,显示：'1'，不显示：'0' */
+        desc: '',
+        /*默认分享理由(可选)*/
+        summary: '',
+        /*分享摘要(可选)*/
+        title: '',
+        /*分享标题(可选)*/
+        site: '',
+        /*分享来源 如：腾讯网(可选)*/
+        pics: '',
+        /*分享图片的路径(可选)*/
+        style: '201',
+        width: 200,
+        height: 100
+      };
+      var s = [];
+      for (var i in p) {
+        s.push(i + '=' + encodeURIComponent(p[i] || ''));
+      }
+      var url = "http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?', s.join('&'), '"
+
+
       window.location.href = url;
     })
     document.getElementById('share1').addEventListener('click', function() {
+      var p = {
+        url: location.href,
+        showcount: '1',
+        /*是否显示分享总数,显示：'1'，不显示：'0' */
+        desc: '',
+        /*默认分享理由(可选)*/
+        summary: '',
+        /*分享摘要(可选)*/
+        title: '',
+        /*分享标题(可选)*/
+        site: '',
+        /*分享来源 如：腾讯网(可选)*/
+        pics: '',
+        /*分享图片的路径(可选)*/
+        style: '201',
+        width: 200,
+        height: 100
+      };
+      var s = [];
+      for (var i in p) {
+        s.push(i + '=' + encodeURIComponent(p[i] || ''));
+      }
+      var url = "http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?', s.join('&'), '"
+
       window.location.href = url;
     })
   })();
@@ -115,8 +198,6 @@
   <script src="js/lib/leap-0.4.2.min.js"></script>
   <script src="js/main.js"></script>
   <script src="js/leapmotion.js"></script>
-  <script type="text/javascript" src="js/lib/vis.js"></script>
-  <script type="text/javascript" src="js/starBg.js"></script>
   <script>
   zfJquery(function() {
     document.getElementById('again').addEventListener('click', function() {
@@ -125,6 +206,7 @@
 
     document.getElementById('save').addEventListener('click', function() {
       if (zf.user != '') {
+        zf.score = zf.countTimes
         zf.hideModal().showList()
       } else {
         window.location.href = 'login.html'
@@ -136,28 +218,28 @@
       zf.init().hideList()
     })
 
-    zf.init()
+    document.getElementById('logout').addEventListener('click', function(e) {
+      zfJquery.ajax({
+        url: 'http://www.violachen.cn/KOPM/cookieLogout',
+        type: 'GET'
+      })
+    })
 
-    // zfJquery.ajax({
-    //   url: 'http://www.violachen.cn/KOPM/cookieLogin',
-    //   type: 'GET',
-    //   success: function(data) {
-    //     if (data != '-1') {
-    //       zf.user = data
-    //     }
-    //     console.log(data)
-    //   }
-    // })
+    zfJquery.ajax({
+      url: 'http://www.violachen.cn/KOPM/cookieLogin',
+      type: 'GET',
+      success: function(data) {
+        if (data != '-1') {
+          zf.user = data
+        }
+        console.log(data)
+      }
+    })
 
     if (localStorage.getItem('from') === 'true') {
-      zf.init().showList()
+      zf.showList().disableFlag()
     }
   })
-
-  document.getElementById('backgroundNetwork').style.height = document.documentElement.clientHeight + "px";
-  document.getElementById('backgroundNetwork').style.width = document.documentElement.clientWidth + "px";
-  bgDraw();
-  bgStartShow();
   </script>
 </body>
 

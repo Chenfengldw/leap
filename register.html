@@ -7,14 +7,6 @@
   <title>登陆</title>
   <link rel="stylesheet" href="./css/normalize-zh.css">
   <link rel="stylesheet" type="text/css" href="./css/login.css">
-  <link href="css/vis.css" rel="stylesheet" />
-  <link href="css/starBg.css" rel="stylesheet" />
-  <style type="text/css">
-  #backgroundNetwork {
-    position: absolute;
-    z-index: -1;
-  }
-  </style>
 </head>
 
 <body>
@@ -43,8 +35,6 @@
   <script type="text/javascript" src="js/lib/md5.js"></script>
   <script type="text/javascript" src="js/lib/util.js"></script>
   <script type="text/javascript" src="js/lib/zfJquery.js"></script>
-  <script type="text/javascript" src="js/lib/vis.js"></script>
-  <script type="text/javascript" src="js/starBg.js"></script>
   <script type="text/javascript">
   zfJquery(function() {
     zfJquery('#register').bind('click', function() {
@@ -63,7 +53,7 @@
               alert('用户名注册失败')
             } else if (data == '1') {
               localStorage.setItem('from', 'true')
-              window.location.href = 'main.html'
+              window.location.href = './main.html'
             } else {
               alert('服务器问题')
             }
@@ -72,12 +62,6 @@
       }
     })
   })
-
-
-  document.getElementById('backgroundNetwork').style.height = document.documentElement.clientHeight + "px";
-  document.getElementById('backgroundNetwork').style.width = document.documentElement.clientWidth + "px";
-  bgDraw();
-  bgStartShow();
   </script>
 </body>
 

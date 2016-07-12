@@ -16,7 +16,7 @@ var zf = {
 
   flag: true,
   isKo: false,
-  score: 0,
+  score: localStorage.getItem('score') || 0,
   nowTime: 15,
   start: 0,
   user: '',
@@ -24,7 +24,6 @@ var zf = {
   countTimes: 0,
   rotateValue: 0,
   context: null,
-
 
   init: function () {
     this.flag = true
@@ -35,9 +34,12 @@ var zf = {
     this.countTimes = 0
     this.rotateValue = 0
     localStorage.setItem('from', 'false')
-    this.user = localStorage.getItem('user') || ''
     this.userDOM.innerHTML = this.user
     return this
+  },
+
+  disableFlag: function () {
+    this.flag = false
   },
 
   showTimer: function () {
@@ -111,34 +113,38 @@ var zf = {
   },
 
   showList: function () {
-    var urlStr = 'http://www.violachen.cn/KOPM/rankList?userName=' + this.user
+    var urlStr = 'http://www.violachen.cn/KOPM/saveScore?score=' + this.score
     zfJquery.ajax({
       url: urlStr,
       type: 'GET',
       success: function (data) {
-        data = data['root']
-        var str = '';
-        for (var i = 0, len = data.length; i < len; i++) {
-          if (i === 7) {
-            if (zf.user === data[i + 1]['username']) {
-              str += "<li><span class='listname'>......</span><span class='listscore'>......</span></li>"
-              str += "<li class='listme'><span class='listname'>" + data[i + 1]['username'] + "</span><span class='listscore'>" + data[i]['score'] + "</span></li>"
-              i = i + 1
-            } else if (zf.user === data[i]['username']) {
-              str += "<li class='listme'><span class='listname'>" + data[i]['username'] + "</span><span class='listscore'>" + data[i]['score'] + "</span></li>"
+        if (data == '-1') {
+          window.location.href = '../login.html'
+        } else {
+          data = data['root']
+          var str = '';
+          for (var i = 0, len = data.length; i < len; i++) {
+            if (i === 7) {
+              if (zf.user === data[i + 1]['username']) {
+                str += "<li><span class='listname'>......</span><span class='listscore'>......</span></li>"
+                str += "<li class='listme'><span class='listname'>" + data[i + 1]['username'] + "</span><span class='listscore'>" + data[i]['score'] + "</span></li>"
+                i = i + 1
+              } else if (zf.user === data[i]['username']) {
+                str += "<li class='listme'><span class='listname'>" + data[i]['username'] + "</span><span class='listscore'>" + data[i]['score'] + "</span></li>"
+              } else {
+                str += "<li><span class='listname'>" + data[i]['username'] + "</span><span class='listscore'>" + data[i]['score'] + "</span></li>"
+              }
             } else {
-              str += "<li><span class='listname'>" + data[i]['username'] + "</span><span class='listscore'>" + data[i]['score'] + "</span></li>"
-            }
-          } else {
-            if (zf.user === data[i]['username']) {
-              str += "<li class='listme'><span class='listname'>" + data[i]['username'] + "</span><span class='listscore'>" + data[i]['score'] + "</span></li>"
-            } else {
-              str += "<li><span class='listname'>" + data[i]['username'] + "</span><span class='listscore'>" + data[i]['score'] + "</span></li>"
-            }
+              if (zf.user === data[i]['username']) {
+                str += "<li class='listme'><span class='listname'>" + data[i]['username'] + "</span><span class='listscore'>" + data[i]['score'] + "</span></li>"
+              } else {
+                str += "<li><span class='listname'>" + data[i]['username'] + "</span><span class='listscore'>" + data[i]['score'] + "</span></li>"
+              }
 
+            }
           }
+          document.getElementById('allList').innerHTML = str;
         }
-        document.getElementById('allList').innerHTML = str;
       }
     })
     this.listModal.style.display = 'block'
