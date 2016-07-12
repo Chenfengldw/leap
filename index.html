@@ -10,15 +10,15 @@
   <link href="css/vis.css" rel="stylesheet" />
   <link href="css/starBg.css" rel="stylesheet" />
   <style type="text/css">
-    #backgroundNetwork {
-      position: absolute;
-      z-index: -1;
-    }
+  #backgroundNetwork {
+    position: absolute;
+    z-index: -1;
+  }
   </style>
 </head>
 
 <body>
- <div id="backgroundNetwork"></div>
+  <div id="backgroundNetwork"></div>
   <div class="container">
     <div class="left">
       <img class="human" src="imgs/human.png" alt="">
@@ -51,10 +51,11 @@
   <script type="text/javascript" src="js/lib/vis.js"></script>
   <script type="text/javascript" src="js/starBg.js"></script>
   <script type="text/javascript">
-    document.getElementById('backgroundNetwork').style.height = document.documentElement.clientHeight + "px";
-        document.getElementById('backgroundNetwork').style.width = document.documentElement.clientWidth + "px";
-        bgDraw();
-        bgStartShow();
+  document.getElementById('backgroundNetwork').style.height = document.documentElement.clientHeight + "px";
+  document.getElementById('backgroundNetwork').style.width = document.documentElement.clientWidth + "px";
+  bgDraw();
+  bgStartShow();
+  // zf.showModal();
   </script>
 </body>
 

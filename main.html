@@ -7,22 +7,22 @@
   <title>打倒产品经理</title>
   <link rel="stylesheet" href="css/normalize-zh.css">
   <link rel="stylesheet" type="text/css" href="./css/main.css">
-    <link href="css/vis.css" rel="stylesheet" />
+  <link href="css/vis.css" rel="stylesheet" />
   <link href="css/starBg.css" rel="stylesheet" />
   <style type="text/css">
-    #backgroundNetwork {
-      position: absolute;
-      z-index: -1;
-    }
+  #backgroundNetwork {
+    position: absolute;
+    z-index: -1;
+  }
   </style>
 </head>
 
 <body>
-<div id="backgroundNetwork"></div>
+  <div id="backgroundNetwork"></div>
   <div class="container">
     <header>
-      <span>zhanfang</span>
-      <a href="#" title=""><img src="imgs/logout.jpg" alt="退出"></a>
+      <span id="user"></span>
+      <a href="http://www.violachen.cn/KOPM/cookieLogout" title=""><img src="imgs/logout.jpg" alt="退出"></a>
     </header>
     <!-- 击打页面效果 -->
     <div class="hit">
@@ -51,7 +51,7 @@
         <div class="o"></div>
       </div>
       <div class="modal" id="modal">
-        <h3>恭喜你，你已经击打产品经理72次</h3>
+        <h3 id="hitCounts"></h3>
         <div class="btns">
           <button id="again">再来一次</button>
           <button id="save">留下战绩</button>
@@ -60,17 +60,7 @@
       </div>
       <div class="modal" id="list">
         <h3>最强榜单</h3>
-        <ul>
-          <li><span class="listname">NO.111我随便起个名字来测试</span><span class="listscore">10</span></li>
-          <li class="listme"><span class="listname">我随便起个名字来测试</span><span class="listscore">10</span></li>
-          <li><span class="listname">我随便起个名字来测试</span><span class="listscore">10</span></li>
-          <li><span class="listname">我随便起个名字来测试</span><span class="listscore">10</span></li>
-          <li><span class="listname">我随便起个名字来测试</span><span class="listscore">10</span></li>
-          <li><span class="listname">我随便起个名字来测试</span><span class="listscore">10</span></li>
-          <li><span class="listname">我随便起个名字来测试</span><span class="listscore">10</span></li>
-          <li><span class="listname">我随便起个名字来测试</span><span class="listscore">10</span></li>
-          <li><span class="listname">我随便起个名字来测试</span><span class="listscore">10</span></li>
-          <li><span class="listname">我随便起个名字来测试</span><span class="listscore">10</span></li>
+        <ul id="allList">
         </ul>
         <div class="btns">
           <button id="again1">再来一次</button>
@@ -120,38 +110,54 @@
     })
   })();
   </script>
-  <!-- <script src="js/timer.js"></script> -->
+  <script type="text/javascript" src="js/lib/zfJquery.js"></script>
   <script type="text/javascript" src="js/zf.js"></script>
   <script src="js/lib/leap-0.4.2.min.js"></script>
   <script src="js/main.js"></script>
   <script src="js/leapmotion.js"></script>
-  <script type="text/javascript" src="js/lib/zfJquery.js"></script>
-    <script type="text/javascript" src="js/lib/vis.js"></script>
+  <script type="text/javascript" src="js/lib/vis.js"></script>
   <script type="text/javascript" src="js/starBg.js"></script>
   <script>
   zfJquery(function() {
     document.getElementById('again').addEventListener('click', function() {
-      zf.init()
-      zf.hideModal()
+      zf.init().hideModal().showTimer()
     })
 
     document.getElementById('save').addEventListener('click', function() {
-      window.location.href = 'login.html'
-      localStorage.setItem('score', zf.score)
+      if (zf.user != '') {
+        zf.hideModal().showList()
+      } else {
+        window.location.href = 'login.html'
+        localStorage.setItem('score', zf.countTimes)
+      }
     })
 
     document.getElementById('again1').addEventListener('click', function() {
-      zf.init()
-      zf.hideList()
+      zf.init().hideList()
     })
 
-    zf.showList()
+    zf.init()
+
+    // zfJquery.ajax({
+    //   url: 'http://www.violachen.cn/KOPM/cookieLogin',
+    //   type: 'GET',
+    //   success: function(data) {
+    //     if (data != '-1') {
+    //       zf.user = data
+    //     }
+    //     console.log(data)
+    //   }
+    // })
+
+    if (localStorage.getItem('from') === 'true') {
+      zf.init().showList()
+    }
   })
 
-     document.getElementById('backgroundNetwork').style.height = document.documentElement.clientHeight + "px";
-        document.getElementById('backgroundNetwork').style.width = document.documentElement.clientWidth + "px";
-        bgDraw();
-        bgStartShow();
+  document.getElementById('backgroundNetwork').style.height = document.documentElement.clientHeight + "px";
+  document.getElementById('backgroundNetwork').style.width = document.documentElement.clientWidth + "px";
+  bgDraw();
+  bgStartShow();
   </script>
 </body>
 

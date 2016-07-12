@@ -7,18 +7,18 @@
   <title>登陆</title>
   <link rel="stylesheet" href="./css/normalize-zh.css">
   <link rel="stylesheet" type="text/css" href="./css/login.css">
-      <link href="css/vis.css" rel="stylesheet" />
+  <link href="css/vis.css" rel="stylesheet" />
   <link href="css/starBg.css" rel="stylesheet" />
   <style type="text/css">
-    #backgroundNetwork {
-      position: absolute;
-      z-index: -1;
-    }
+  #backgroundNetwork {
+    position: absolute;
+    z-index: -1;
+  }
   </style>
 </head>
 
 <body>
-<div id="backgroundNetwork"></div>
+  <div id="backgroundNetwork"></div>
   <div class="container">
     <header>
       <h1>打倒产品经理</h1>
@@ -52,26 +52,32 @@
       var password = zfJquery('#password')[0].value
       var repassword = zfJquery('#repassword')[0].value
       if (checkUsername(username) && checkPassword(password) || checkRepassword(password, repassword)) {
+        var score = localStorage.getItem('score') || 0
+        password = md5(password)
+        var urlStr = 'http://www.violachen.cn/KOPM/userSignin?userName=' + username + '&passWord=' + password + '&score=' + score
         zfJquery.ajax({
-          url: './test.json',
+          url: urlStr,
           type: 'GET',
-          data: {
-            username: username,
-            password: md5(password),
-            score: localStorage.getItem('score')
-          },
           success: function(data) {
-            console.log(data)
+            if (data == '-1') {
+              alert('用户名注册失败')
+            } else if (data == '1') {
+              localStorage.setItem('from', 'true')
+              window.location.href = 'main.html'
+            } else {
+              alert('服务器问题')
+            }
           }
         })
       }
     })
   })
 
+
   document.getElementById('backgroundNetwork').style.height = document.documentElement.clientHeight + "px";
-        document.getElementById('backgroundNetwork').style.width = document.documentElement.clientWidth + "px";
-        bgDraw();
-        bgStartShow();
+  document.getElementById('backgroundNetwork').style.width = document.documentElement.clientWidth + "px";
+  bgDraw();
+  bgStartShow();
   </script>
 </body>
 

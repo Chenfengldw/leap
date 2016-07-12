@@ -216,16 +216,14 @@ function leapMotion() {
 }
 
 
-function onDeviceConnected()
-{
-    zf.start=1;
-    zf.hideWarning();
+function onDeviceConnected() {
+  zf.start = 1;
+  zf.hideWarning();
 }
 
-function onDeviceDisconnect()
-{
-    zf.start=0;
-    zf.showWarning();
+function onDeviceDisconnect() {
+  zf.start = 0;
+  zf.showWarning();
 }
 
 
