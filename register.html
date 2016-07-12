@@ -7,9 +7,18 @@
   <title>登陆</title>
   <link rel="stylesheet" href="./css/normalize-zh.css">
   <link rel="stylesheet" type="text/css" href="./css/login.css">
+      <link href="css/vis.css" rel="stylesheet" />
+  <link href="css/starBg.css" rel="stylesheet" />
+  <style type="text/css">
+    #backgroundNetwork {
+      position: absolute;
+      z-index: -1;
+    }
+  </style>
 </head>
 
 <body>
+<div id="backgroundNetwork"></div>
   <div class="container">
     <header>
       <h1>打倒产品经理</h1>
@@ -30,9 +39,12 @@
       <button id="register">注册</button>
     </section>
   </div>
+  <audio src="music/music_cartoony_background.mp3" autoplay="autoplay" loop="loop"></audio>
   <script type="text/javascript" src="js/lib/md5.js"></script>
   <script type="text/javascript" src="js/lib/util.js"></script>
   <script type="text/javascript" src="js/lib/zfJquery.js"></script>
+  <script type="text/javascript" src="js/lib/vis.js"></script>
+  <script type="text/javascript" src="js/starBg.js"></script>
   <script type="text/javascript">
   zfJquery(function() {
     zfJquery('#register').bind('click', function() {
@@ -55,6 +67,11 @@
       }
     })
   })
+
+  document.getElementById('backgroundNetwork').style.height = document.documentElement.clientHeight + "px";
+        document.getElementById('backgroundNetwork').style.width = document.documentElement.clientWidth + "px";
+        bgDraw();
+        bgStartShow();
   </script>
 </body>
 

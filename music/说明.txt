@@ -1,0 +1,8 @@
+以下两段音效可以用于打空效果
+fist_swing_07
+fist_swing_10 
+
+以下三段音效可以用于碰撞效果
+kick_H_08
+kick_H_09
+kick_H_05
