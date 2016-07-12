@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>登陆</title>
+  <title>注册</title>
   <link rel="stylesheet" href="./css/normalize-zh.css">
   <link rel="stylesheet" type="text/css" href="./css/login.css">
 </head>
@@ -40,16 +40,21 @@
       var password = zfJquery('#password')[0].value
       var repassword = zfJquery('#repassword')[0].value
       if (checkUsername(username) && checkPassword(password) || checkRepassword(password, repassword)) {
+        var score = localStorage.getItem('score') || 0
+        password = md5(password)
+        var urlStr = 'http://www.violachen.cn/KOPM/userSignin?userName=' + username + '&passWord=' + password + '&score=' + score
         zfJquery.ajax({
-          url: './test.json',
+          url: urlStr,
           type: 'GET',
-          data: {
-            username: username,
-            password: md5(password),
-            score: localStorage.getItem('score')
-          },
           success: function(data) {
-            console.log(data)
+            if (data == '-1') {
+              alert('用户名注册失败')
+            } else if (data == '1') {
+              localStorage.setItem('from', 'true')
+              window.location.href = 'main.html'
+            } else {
+              alert('服务器问题')
+            }
           }
         })
       }
