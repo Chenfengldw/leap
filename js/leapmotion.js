@@ -2,7 +2,6 @@ var canvas = document.getElementById("myCanvas");
 var ctx = canvas.getContext("2d");
 
 var oSize = getSize();
-console.log(oSize);
 canvas.width = oSize.cWidth;
 canvas.height = oSize.cHeight;
 var mostIn = -100;
@@ -20,11 +19,12 @@ rightFist.src = "imgs/rightFist.png";
 leftFist.src = "imgs/leftFist.png";
 
 function leapMotion() {
-
   var controller = new Leap.Controller();
   controller.connect();
-  controller.on('deviceConnected', onDeviceConnected);
+  controller.on('deviceAttached', onAttached);
   controller.on('deviceDisconnected', onDeviceDisconnect);
+  console.log(controller);
+  zf.showWarning();
 
   console.log("hello");
   var frameArr = new Array();
@@ -32,8 +32,6 @@ function leapMotion() {
   var graspThresh = 25;
   var lastGesture = -1; //-1 null, 0 grasp,1 circle,2 key,3 screen ,4 swipe,after 1 sec it will be reset to -1
   var timer = 0;
-
-
 
   Leap.loop({ frameEventName: "animationFrame" }, function (frame) {
 
@@ -63,6 +61,7 @@ function leapMotion() {
       if (zf.start === 0) {
         zf.showTimer();
         zf.start = 1;
+
       }
 
       var position = hand.palmPosition;
@@ -70,7 +69,6 @@ function leapMotion() {
       if (deep < mostIn) deep = mostIn;
       if (deep > mostOut) deep = mostOut;
       var normalized = frame.interactionBox.normalizePoint(position);
-      console.log(normalized[1]);
       var x = ctx.canvas.width * normalized[0];
       var y = ctx.canvas.height * (1 - normalized[1]);
 
@@ -80,6 +78,14 @@ function leapMotion() {
         if (getSide(hand) == 1) leftId = hand.id;
         else rightId = hand.id;
 
+      } else if (frame.hands.length == 2) {
+        if (frame.hands[0].palmPosition[0] < frame.hands[1].palmPosition[0]) {
+          leftId = frame.hands[0].id;
+          rightId = frame.hands[1].id;
+        } else {
+          leftId = frame.hands[1].id;
+          rightId = frame.hands[0].id;
+        }
       }
 
       //draw image of fists
@@ -108,6 +114,7 @@ function leapMotion() {
           ((detect.x > rect.x - rect.w / 2) && (detect.x < rect.x + rect.w / 2) && (detect.y > rect.y) && (detect.y < rect.y + rect.h)))
       ) {
         var speed = Math.sqrt((hand.palmVelocity[0] * hand.palmVelocity[0]) + (hand.palmVelocity[2] * hand.palmVelocity[2]));
+
         if (hand.id == leftId) {
           if (hand.palmVelocity[0] > 0) {
             console.log("left beat! v=");
@@ -127,14 +134,13 @@ function leapMotion() {
         ((detect.x - point.x) * (detect.x - point.x) + (detect.y - point.y) * (detect.y - point.y) > point.r * point.r) &&
         ((detect.x < rect.x - rect.w / 2) || (detect.x > rect.x + rect.w / 2) || (detect.y < rect.y) || (detect.y > rect.y + rect.h))
       ) {
+        console.log("out");
         bitted = 0;
       }
 
       if (hand.id > lastHandId) lastHandId = hand.id;
     });
   });
-
-
 
   Leap.loop({ frameEventName: "animationFrame" }, function (frame) {
 
@@ -168,7 +174,7 @@ function leapMotion() {
 
         //Here output to explorer the info of a grasp.
         lastGesture = 0;
-        console.log("Grasp Gesture at" + graspX + "," + graspY);
+        zf.hideWarning();
       }
     }
 
@@ -216,12 +222,14 @@ function leapMotion() {
 }
 
 
-function onDeviceConnected() {
+function onAttached() {
+  console.log("connnected");
   zf.start = 1;
   zf.hideWarning();
 }
 
 function onDeviceDisconnect() {
+  console.log("disconnnected");
   zf.start = 0;
   zf.showWarning();
 }

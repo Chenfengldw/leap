@@ -24,6 +24,9 @@ var zf = {
   countTimes: 0,
   rotateValue: 0,
   context: null,
+  timeBegin: 0,
+  timeEnd: 0,
+
 
   init: function () {
     this.flag = true
@@ -168,7 +171,11 @@ var zf = {
     var countPosy = ['-160px', '-267px', '-375px', '-481px', '-160px', '-267px', '-374px', '-481px', '-54px', '-160px', '-265px', '-373px'];
     var leftnum = document.getElementById("leftNumber");
     var rightnum = document.getElementById("rightNumber");
-    this.countTimes++;
+    var d = new Date();
+    this.timeBegin = d.getTime();
+    if (this.timeBegin - this.timeEnd > 100)
+      this.countTimes++;
+    this.timeEnd = d.getTime();
     if (this.countTimes > 99) {
       leftnum.style.backgroundPositionX = parseInt(countPosx[9]) + 'px';
       leftnum.style.backgroundPositionY = parseInt(countPosy[9]) + 'px';
