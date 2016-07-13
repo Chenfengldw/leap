@@ -13,6 +13,7 @@ var zf = {
   timerNumber: document.getElementById('timerNumber'),
   userDOM: document.getElementById('user'),
   hitCounts: document.getElementById('hitCounts'),
+  tip: document.getElementById('tip'),
 
   flag: true,
   isKo: false,
@@ -36,11 +37,10 @@ var zf = {
     this.start = 0
     this.countTimes = 0
     this.rotateValue = 0
-    localStorage.setItem('from', 'false')
-    this.userDOM.innerHTML = this.user
+      // this.hideModal()
+      // this.hideList()
     return this
   },
-
   disableFlag: function () {
     this.flag = false
   },
@@ -102,6 +102,16 @@ var zf = {
 
   hideModal: function () {
     this.modal.style.display = 'none'
+    return this
+  },
+
+  showTip: function () {
+    this.tip.style.display = 'block'
+    return this
+  },
+
+  hideTip: function () {
+    this.tip.style.display = 'none'
     return this
   },
 
