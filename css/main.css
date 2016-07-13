@@ -285,36 +285,36 @@ img {
 
 #timerNumber {
   position: absolute;
-  top: 61px;
-  left: 39px;
-  z-index: 2;
-  width: 120px;
-  height: 80px;
+  background-image: url('../imgs/number.png');
+  border: 0;
   padding: 0;
   overflow: hidden;
-  border: 0;
-  background-image: url("../imgs/number.png");
+  width: 120px;
+  height: 80px;
   background-position: -367px -50px;
+  left: 39px;
+  top: 50px;
+  z-index: 2;
 }
 
 #leftNumber {
   position: absolute;
-  top: 39px;
-  left: 37px;
   width: 50px;
   height: 80px;
-  background-image: url("../imgs/number.png");
+  background-image: url('../imgs/number.png');
   background-position: -375px -160px;
+  left: 35px;
+  top: 31px;
 }
 
 #rightNumber {
   position: absolute;
-  top: 39px;
-  left: 84px;
   width: 50px;
   height: 80px;
-  background-image: url("../imgs/number.png");
+  background-image: url('../imgs/number.png');
   background-position: -375px -160px;
+  left: 84px;
+  top: 31px;
 }
 
 .mask-modal {
@@ -364,4 +364,24 @@ img {
 
 #list .listme {
   color: #3672d4;
+}
+
+#timeTip {
+  width: 80px;
+  height: 40px;
+  background-image: url('../imgs/number.png');
+  position: absolute;
+  background-position: -500px -515px;
+  left: 69px;
+  top: 121px;
+}
+
+#countTip {
+  width: 80px;
+  height: 40px;
+  background-image: url('../imgs/number.png');
+  position: absolute;
+  background-position: -565px -95px;
+  left: 43px;
+  top: 103px;
 }
