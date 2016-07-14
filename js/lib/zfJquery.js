@@ -190,7 +190,8 @@
       type: 'GET',
       data: false,
       success: false, //数据成功返回后的回调方法
-      complete: false //ajax完成后的回调方法
+      complete: false, //ajax完成后的回调方法
+      reType: 'json' //返回格式
     };
     var xhr = createXHR();
     var i;
@@ -208,7 +209,9 @@
 
         if ((status >= 200 && status < 300) || status === 304) {
           result = xhr.responseText;
-          if (w.JSON) {
+          if (options.reType === 'text') {
+            result = result
+          } else if (w.JSON) {
             result = JSON.parse(result);
           } else {
             result = w.eval('(' + result + ')');

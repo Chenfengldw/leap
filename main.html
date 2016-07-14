@@ -12,8 +12,8 @@
 <body>
   <div class="container">
     <header>
-      <span>zhanfang</span>
-      <a href="#" title=""><img src="imgs/logout.jpg" alt="退出"></a>
+      <span id="user"></span>
+      <a href="javascript:;" title="" id="logout"><img src="imgs/logout.jpg" alt="退出"></a>
     </header>
     <!-- 击打页面效果 -->
     <div class="hit">
@@ -23,16 +23,21 @@
         <canvas id="timerCanvas" width="220" height="220"></canvas>
         <img id="innerCircle" src="imgs/innerCircle2.png" width="130" height="130">
         <div id="timerNumber"></div>
+        <div id="timeTip"></div>
       </div>
       <div class="counter">
         <img id="swing" src="imgs/swing.png">
         <div id="leftNumber"></div>
         <div id="rightNumber"></div>
+        <div id="countTip"></div>
       </div>
     </div>
     <!-- 击打页面效果 -->
     <!-- 模态窗 -->
     <div class="mask">
+      <div class="tip" id="tip">
+        <h2>双拳快速出击以开始</h2>
+      </div>
       <div class='timer321' id="num3"><img src="imgs/3.png" alt="3"></div>
       <div class='timer321' id="num2"><img src="imgs/2.png" alt="2"></div>
       <div class='timer321' id="num1"><img src="imgs/1.png" alt="1"></div>
@@ -42,7 +47,7 @@
         <div class="o"></div>
       </div>
       <div class="modal" id="modal">
-        <h3>恭喜你，你已经击打产品经理72次</h3>
+        <h3 id="hitCounts"></h3>
         <div class="btns">
           <button id="again">再来一次</button>
           <button id="save">留下战绩</button>
@@ -51,74 +56,128 @@
       </div>
       <div class="modal" id="list">
         <h3>最强榜单</h3>
-        <ul>
-          <li>分享至QQ空间</li>
-          <li>分享至QQ空间</li>
-          <li>分享至QQ空间</li>
+        <ul id="allList">
         </ul>
         <div class="btns">
-          <button>再来一次</button>
-          <button>分享至QQ空间</button>
+          <button id="again1">再来一次</button>
+          <button id="share1">分享至QQ空间</button>
         </div>
       </div>
       <div class="mask-modal" id="warning">
         <div class="warning-modal">
-          <h3>您还未连接leap motion 设备，请连接设备！</h3>
+          <h3>请确定leap motion 设备连接正常</h3>
+          <h3>尝试抓一下！</h3>
         </div>
       </div>
     </div>
     <!-- 模态窗 -->
   </div>
+  <audio src="music/music_cartoony_background.mp3" autoplay="autoplay" loop="loop"></audio>
   <script type="text/javascript">
   (function() {
-    var p = {
-      url: location.href,
-      showcount: '1',
-      /*是否显示分享总数,显示：'1'，不显示：'0' */
-      desc: '',
-      /*默认分享理由(可选)*/
-      summary: '',
-      /*分享摘要(可选)*/
-      title: '',
-      /*分享标题(可选)*/
-      site: '',
-      /*分享来源 如：腾讯网(可选)*/
-      pics: '',
-      /*分享图片的路径(可选)*/
-      style: '201',
-      width: 113,
-      height: 39
-    };
-    var s = [];
-    for (var i in p) {
-      s.push(i + '=' + encodeURIComponent(p[i] || ''));
-    }
-    var url = "http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?', s.join('&'), '"
-      // document.write(['<a version="1.0"  href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?', s.join('&'), '" target="_blank">分享</a>'].join(''));
     document.getElementById('share').addEventListener('click', function() {
+      var p = {
+        url: location.href,
+        showcount: '1',
+        /*是否显示分享总数,显示：'1'，不显示：'0' */
+        desc: '你还记得PM改需求时你崩溃的内心么\n你还记得加班到深夜只为实现一个”简单功能“么\n让我们奋起反抗！\n打倒产品经理！！！\n',
+        /*默认分享理由(可选)*/
+        summary: '',
+        /*分享摘要(可选)*/
+        title: '我在打倒产品经理，你呢？',
+        /*分享标题(可选)*/
+        site: 'http://www.violachen.cn/KOPM/',
+        /*分享来源 如：腾讯网(可选)*/
+        pics: 'http://7xm1f1.com1.z0.glb.clouddn.com/kopm.jpg',
+        /*分享图片的路径(可选)*/
+        style: '201',
+        width: 200,
+        height: 100
+      };
+      var s = [];
+      for (var i in p) {
+        s.push(i + '=' + encodeURIComponent(p[i] || ''));
+      }
+      var url = 'http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?' + s.join('&')
+
+      window.location.href = url
+    })
+    document.getElementById('share1').addEventListener('click', function() {
+      var p = {
+        url: location.href,
+        showcount: '1',
+        /*是否显示分享总数,显示：'1'，不显示：'0' */
+        desc: '你还记得PM改需求时你崩溃的内心么\n你还记得加班到深夜只为实现一个”简单功能“么\n让我们奋起反抗！\n打倒产品经理！！！\n',
+        /*默认分享理由(可选)*/
+        summary: '',
+        /*分享摘要(可选)*/
+        title: '我在打倒产品经理，你呢？',
+        /*分享标题(可选)*/
+        site: 'http://www.violachen.cn/KOPM/',
+        /*分享来源 如：腾讯网(可选)*/
+        pics: 'http://7xm1f1.com1.z0.glb.clouddn.com/kopm.jpg',
+        /*分享图片的路径(可选)*/
+        style: '201',
+        width: 200,
+        height: 100
+      };
+      var s = [];
+      for (var i in p) {
+        s.push(i + '=' + encodeURIComponent(p[i] || ''));
+      }
+      var url = 'http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?' + s.join('&')
+
       window.location.href = url;
     })
   })();
   </script>
-  <!-- <script src="js/timer.js"></script> -->
+  <script type="text/javascript" src="js/lib/zfJquery.js"></script>
   <script type="text/javascript" src="js/zf.js"></script>
   <script src="js/lib/leap-0.4.2.min.js"></script>
   <script src="js/main.js"></script>
   <script src="js/leapmotion.js"></script>
-  <script type="text/javascript" src="js/lib/zfJquery.js"></script>
   <script>
   zfJquery(function() {
     document.getElementById('again').addEventListener('click', function() {
-      zf.init()
-      zf.hideModal()
+      zf.init().hideModal().showTimer()
     })
 
     document.getElementById('save').addEventListener('click', function() {
-      window.location.href = 'login.html'
-      localStorage.setItem('score', zf.score)
+      if (zf.user != '') {
+        zf.score = zf.countTimes
+        zf.hideModal().showList()
+      } else {
+        window.location.href = 'http://www.violachen.cn/KOPM/login.html'
+        localStorage.setItem('score', zf.countTimes)
+      }
     })
 
-    //zf.showWarning()
+    document.getElementById('again1').addEventListener('click', function() {
+      zf.init().hideList().hideWarning().hideModal().showTimer()
+    })
+
+    document.getElementById('logout').addEventListener('click', function(e) {
+      zfJquery.ajax({
+        url: 'http://www.violachen.cn/KOPM/cookieLogout',
+        type: 'GET'
+      })
+    })
+
+    zfJquery.ajax({
+      url: 'http://www.violachen.cn/KOPM/cookieLogin',
+      reType: 'text',
+      success: function(data) {
+        console.log(data)
+        if (data != '-1') {
+          zf.user = data
+          zf.userDOM.innerHTML = data
+          if (localStorage.getItem('from') == 'true') {
+            localStorage.setItem('from', 'false')
+            zf.hideWarning().showList().disableFlag()
+          }
+        }
+      }
+    })
   })
   </script>
 </body>
